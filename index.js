@@ -27,6 +27,7 @@ var MERCHANT_INFORMATION_TEMPLATE_ID_GUID = '00'
 var BOT_ID_MERCHANT_PHONE_NUMBER = '01'
 var BOT_ID_MERCHANT_TAX_ID = '02'
 var BOT_ID_MERCHANT_EWALLET_ID = '03'
+var BOT_ID_MERCHANT_BANK_ID = '04'
 var GUID_PROMPTPAY = 'A000000677010111'
 var TRANSACTION_CURRENCY_THB = '764'
 var COUNTRY_CODE_TH = 'TH'
@@ -38,8 +39,10 @@ function generatePayload (target, options) {
   var targetType = (
     target.length >= 15 ? (
       BOT_ID_MERCHANT_EWALLET_ID
-    ) : target.length >= 13 ? (
+    ) : target.length >= 13 && target.charAt(0) == '1' ? (
       BOT_ID_MERCHANT_TAX_ID
+    ) : target.length >= 13 ? (
+      BOT_ID_MERCHANT_BANK_ID
     ) : (
       BOT_ID_MERCHANT_PHONE_NUMBER
     )
